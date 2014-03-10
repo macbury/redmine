@@ -187,13 +187,7 @@ module RepositoriesHelper
   end
 
   def git_field_tags(form, repository)
-    content_tag('p', form.text_field(
-                       :url, :label => l(:field_path_to_repository),
-                       :size => 60, :required => true,
-                       :disabled => !repository.safe_attribute?('url')
-                         ) +
-                      '<br />'.html_safe +
-                      l(:text_git_repository_note)) +
+    content_tag('p', form.select(:url, Dir["/home/git/repositories/**/*.git"].sort.map { |path| [File.basename(path), path] }, :label => l(:field_path_to_repository), :required => true, :data => { repos: Dir["/home/git/repositories/**/*.git"].sort }, :disabled => !repository.safe_attribute?('url') +
     content_tag('p', form.select(
                         :path_encoding, [nil] + Setting::ENCODINGS,
                         :label => l(:field_scm_path_encoding)

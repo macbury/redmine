@@ -19,6 +19,10 @@ group :openid do
   gem "rack-openid"
 end
 
+gem 'sinatra', '>= 1.3.0', :require => nil
+gem "sidekiq"
+gem "sidekiq-cron", "~> 0.2.0"
+
 platforms :mri, :mingw do
   # Optional gem for exporting the gantt to a PNG file, not supported with jruby
   group :rmagick do
